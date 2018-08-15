@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RoryDungan/esangel-webgl/issues"
   },
-  "homepage": "https://github.com/RoryDungan/esangel-webgl#readme"
+  "homepage": "https://github.com/RoryDungan/esangel-webgl#readme",
+  "dependencies": {
+    "ramda": "^0.25.0"
+  }
 }
