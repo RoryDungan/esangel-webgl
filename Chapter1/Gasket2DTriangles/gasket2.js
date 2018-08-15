@@ -8,15 +8,21 @@
 const sierpinski = function (iterations) {
   const divideTriangle = function* (a, b, c, count) {
     if (count <= 0) {
-      yield [a, b, c]
+      yield a
+      yield b
+      yield c
       return
     }
 
-    const newCount = count - 1,
+    // Bisect the sides
+    const
       ab = mix(a, b, 0.5),
       ac = mix(a, c, 0.5),
       bc = mix(b, c, 0.5)
 
+    const newCount = count - 1
+
+    // Three new triangles
     yield *divideTriangle(a, ab, ac, newCount)
     yield *divideTriangle(c, ac, bc, newCount)
     yield *divideTriangle(b, bc, ab, newCount)
@@ -54,7 +60,7 @@ const init = () => {
   // Create points
   const numDivisions = 5,
     tris = sierpinski(numDivisions),
-    numTris = tris.length
+    numVertices = tris.length
 
   const buffer = gl.createBuffer()
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
@@ -64,7 +70,7 @@ const init = () => {
   gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0)
   gl.enableVertexAttribArray(vPosition)
 
-  render(gl, numTris)
+  render(gl, numVertices)
 }
 
 window.onload = init
