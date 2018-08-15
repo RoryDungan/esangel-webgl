@@ -5,7 +5,7 @@
  * points.
  * @param {number} numPoints
  */
-const sierpinski = numPoints => {
+const sierpinski = function* (numPoints) {
   const vertices = [
     vec2(-1, -1),
     vec2( 0,  1),
@@ -15,15 +15,15 @@ const sierpinski = numPoints => {
   const u = mix(vertices[0], vertices[1], 0.5)
   const v = mix(vertices[0], vertices[2], 0.5)
 
-  const points = [mix(u, v, 0.5)]
+  let point = mix(u, v, 0.5)
 
-  for (let i = 0; points.length < numPoints; ++i) {
+  for (let i = 0; i < numPoints; i++) {
+    yield point
+
     const j = Math.floor(Math.random() * 3)
 
-    points.push(mix(points[i], vertices[j], 0.5))
+    point = mix(point, vertices[j], 0.5)
   }
-
-  return points
 }
 
 const render = (gl, numPoints) => {
@@ -48,7 +48,7 @@ const init = () => {
 
   // Create points
   const numPoints = 5000
-  const points = sierpinski(numPoints)
+  const points = [...sierpinski(numPoints)]
 
   const buffer = gl.createBuffer()
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
