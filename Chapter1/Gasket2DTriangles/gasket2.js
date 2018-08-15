@@ -20,6 +20,18 @@ const sierpinski = function (iterations) {
       ac = mix(a, c, 0.5),
       bc = mix(b, c, 0.5)
 
+    const perturbValue = 0.14
+
+    const magAB = length(subtract(ab, a))
+    const magAC = length(subtract(ac, a))
+    const magBC = length(subtract(bc, b))
+    ab[0] += (Math.random() * 2 - 1) * magAB * perturbValue
+    ab[1] += (Math.random() * 2 - 1) * magAB * perturbValue
+    ac[0] += (Math.random() * 2 - 1) * magAC * perturbValue
+    ac[1] += (Math.random() * 2 - 1) * magAC * perturbValue
+    bc[0] += (Math.random() * 2 - 1) * magBC * perturbValue
+    bc[1] += (Math.random() * 2 - 1) * magBC * perturbValue
+
     const newCount = count - 1
 
     // Three new triangles
