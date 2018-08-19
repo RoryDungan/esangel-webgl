@@ -43,6 +43,8 @@
         -1 + 2 * (canvas.height - evt.clientY) / canvas.height
       )
       addPoint(pos)
+
+      window.requestAnimationFrame(render)
     })
 
     const render = () => {
@@ -50,11 +52,9 @@
       if (vertexIndex > 0) {
         gl.drawArrays(gl.POINTS, 0, vertexIndex)
       }
-
-      window.requestAnimationFrame(render)
     }
 
-    render()
+    window.requestAnimationFrame(render)
   }
 
   window.onload = init
